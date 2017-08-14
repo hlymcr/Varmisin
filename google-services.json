@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "642234718543",
+    "firebase_url": "https://varmisin-f8cf2.firebaseio.com",
+    "project_id": "varmisin-f8cf2",
+    "storage_bucket": "varmisin-f8cf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642234718543:android:11be0c86679148b9",
+        "android_client_info": {
+          "package_name": "com.example.hlymcr.varmisin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642234718543-n2k2o58m796c9fis0c2tvp1ffmse8uj2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hlymcr.varmisin",
+            "certificate_hash": "f51b11a65904c499d66aa421ab07ff0ce0fcb854"
+          }
+        },
+        {
+          "client_id": "642234718543-g1v938dtoj1ho8mpq0f8leov3lbmkirv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCberiZWgbEQvXlu1AUxZpFasjC-pdpyew"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642234718543-g1v938dtoj1ho8mpq0f8leov3lbmkirv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

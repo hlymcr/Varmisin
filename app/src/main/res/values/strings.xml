@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Var mısın</string>
+    <string name="action_settings">Bilgilerimi Düzenle</string>
+
+
+    <!-- Button text -->
+
+
+    <string name="app_id">1557261917653078</string>
+    <string name="title_activity_navigation_drawer"></string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+</resources>

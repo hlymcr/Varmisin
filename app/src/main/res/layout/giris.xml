@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    tools:context="com.example.hlymcr.varmisin.MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        class="com.example.hlymcr.tutumlulistem.MainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="cursive"
+        android:text="Var mısın?"
+        android:textColor="#0f0066"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:drawableBottom="@drawable/cast_expanded_controller_actionbar_bg_gradient_light"
+        android:onClick="Login"
+        android:text="Giriş"
+
+        android:textColor="@color/cardview_light_background"
+        android:textColorHint="@color/cardview_light_background"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/sifreH"
+        android:layout_centerHorizontal="true" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="63dp"
+        android:background="@color/com_facebook_button_border_color_focused">
+
+        <EditText
+            android:id="@+id/kullanici"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="E-posta"
+            android:inputType="textPersonName"
+            android:textColor="@color/wallet_bright_foreground_holo_light"
+            android:textColorHint="@color/wallet_bright_foreground_holo_light"
+            android:textColorLink="@color/wallet_bright_foreground_holo_light" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textInputLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="52dp"
+        android:background="@color/com_facebook_button_border_color_focused">
+
+        <EditText
+            android:id="@+id/sifre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Şifre"
+
+            android:inputType="textPassword"
+            android:textColor="@color/wallet_bright_foreground_holo_light"
+            android:textColorHint="@color/wallet_bright_foreground_holo_light"
+            android:textColorLink="@color/wallet_bright_foreground_holo_light" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/My.EditText.Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/google"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:text="Veya Hızlıca bağlan"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_sign_in"
+        android:elevation="0dp"
+        android:password="false"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:srcCompat="@drawable/google1"
+        android:layout_alignTop="@+id/face"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <ImageView
+        android:id="@+id/face"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        facebook:srcCompat="@drawable/face1"
+        android:layout_marginStart="29dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView" />
+
+    <ImageButton
+        android:id="@+id/sifreH"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        facebook:srcCompat="@drawable/ic_help_black_24dp"
+        android:layout_marginEnd="11dp"
+        android:layout_below="@+id/textInputLayout2"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:srcCompat="@drawable/yrme1"
+        android:alpha="0.1"
+        android:layout_above="@+id/google"
+        android:layout_alignStart="@+id/textInputLayout" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:srcCompat="@drawable/kosma"
+        android:alpha="0.1"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toEndOf="@+id/btn_sign_in"
+        android:layout_marginTop="38dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:srcCompat="@drawable/sarki"
+        android:alpha="0.2"
+        android:layout_alignBottom="@+id/google"
+        android:layout_alignEnd="@+id/textInputLayout2"
+        android:layout_marginBottom="12dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:srcCompat="@drawable/kedi"
+        android:alpha="0.2"
+        android:layout_above="@+id/textInputLayout2"
+        android:layout_toEndOf="@+id/btn_sign_in" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:alpha="0.1"
+        facebook:srcCompat="@drawable/resimciz"
+        android:layout_below="@+id/btn_sign_in"
+        android:layout_toEndOf="@+id/button2" />
+
+
+</RelativeLayout>

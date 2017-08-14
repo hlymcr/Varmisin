@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/profil"
+            android:title="Profil" />
+        <item
+            android:id="@+id/nav_iddialarim"
+            android:icon="@drawable/iddialarim"
+            android:title="İddialarım" />
+        <item
+            android:id="@+id/nav_armalar"
+            android:icon="@drawable/kupa"
+            android:title="Armalarım" />
+        <item
+            android:id="@+id/nav_vistek"
+            android:icon="@drawable/vistek"
+            android:title="Var mısın İstekleri" />
+        <item
+            android:id="@+id/nav_arkistek"
+            android:icon="@drawable/arkistek"
+            android:title="Arkadaş İstekleri" />
+
+    </group>
+
+    <item android:title="İletişim">
+        <menu>
+
+            <item
+                android:id="@+id/nav_yardim"
+                android:icon="@drawable/help"
+                android:title="Yardım" />
+
+
+
+
+        </menu>
+    </item>
+
+</menu>
