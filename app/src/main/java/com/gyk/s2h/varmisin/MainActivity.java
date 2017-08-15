@@ -1,22 +1,12 @@
-package com.example.hlymcr.varmisin;
+package com.gyk.s2h.varmisin;
 
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
-import android.view.Window;
-import android.widget.Toast;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 

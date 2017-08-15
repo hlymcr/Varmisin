@@ -1,8 +1,4 @@
-package com.example.hlymcr.varmisin;
-
-/**
- * Created by HULYA on 23.07.2017.
- */
+package com.gyk.s2h.varmisin;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ArkadasAra extends Fragment {
-    public static ArkadasAra newInstance() {
-        ArkadasAra fragment = new ArkadasAra();
+/**
+ * Created by HULYA on 23.07.2017.
+ */
+
+public class Yapilacaklar extends Fragment {
+    public static Yapilacaklar newInstance() {
+        Yapilacaklar fragment = new Yapilacaklar();
         return fragment;
     }
 
@@ -24,6 +24,6 @@ public class ArkadasAra extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.arkara, container, false);
+        return inflater.inflate(R.layout.yapilcaklar, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hlymcr.varmisin;
+package com.gyk.s2h.varmisin;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

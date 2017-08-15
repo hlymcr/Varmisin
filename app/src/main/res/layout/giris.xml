@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context="com.example.hlymcr.varmisin.MainActivity">
+    tools:context="com.gyk.s2h.varmisin.MainActivity">
 
 
     <TextView
         android:id="@+id/textView"
-        class="com.example.hlymcr.tutumlulistem.MainActivity"
+        class="com.gyk.s2h.tutumlulistem.MainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

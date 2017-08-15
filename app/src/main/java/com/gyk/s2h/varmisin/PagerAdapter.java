@@ -1,4 +1,4 @@
-package com.example.hlymcr.varmisin;
+package com.gyk.s2h.varmisin;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;

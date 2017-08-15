@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hlymcr.varmisin">
+    package="com.gyk.s2h.varmisin">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.gyk.s2h.varmisin.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,12 +29,12 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".SifremiHatirla" />
+        <activity android:name="com.gyk.s2h.varmisin.SifremiHatirla" />
         <activity
-            android:name=".NavigationDrawer"
+            android:name="com.gyk.s2h.varmisin.NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme" />
-        <activity android:name=".UserProfilEdit" />
+        <activity android:name="com.gyk.s2h.varmisin.UserProfilEdit" />
     </application>
 
 </manifest>
