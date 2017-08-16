@@ -210,9 +210,7 @@ public class NavigationDrawer extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent=new Intent(NavigationDrawer.this, UserProfilEdit.class);
-            startActivity(intent);
-            return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -225,6 +223,9 @@ public class NavigationDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
+
+            Intent intent = new Intent(this,Profil.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_iddialarim) {
 

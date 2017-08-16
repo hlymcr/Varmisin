@@ -4,75 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/com_facebook_button_background_color_disabled"
     tools:context="com.gyk.s2h.varmisin.UserProfilEdit">
 
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="101dp"
-        android:text="Ad / Soyad"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/adres" />
-
-    <EditText
-        android:id="@+id/isim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView14"
-        android:layout_below="@+id/textView14"
-        android:layout_marginTop="35dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/isim"
-        android:layout_below="@+id/isim"
-        android:layout_marginTop="43dp"
-        android:text="Adres" />
-
-    <EditText
-        android:id="@+id/adres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView15"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/adres"
-        android:layout_below="@+id/adres"
-        android:layout_marginTop="39dp"
-        android:text="Telefon" />
-
-    <EditText
-        android:id="@+id/tel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView16"
-        android:layout_below="@+id/textView16"
-        android:layout_marginTop="39dp"
-        android:ems="10"
-        android:inputType="phone" />
 
     <Button
         android:id="@+id/kayit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginEnd="132dp"
         android:background="@color/colorPrimary"
         android:text="Kaydet"
         android:textColor="@android:color/background_light" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/kayit"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="372dp"
+        android:background="@color/com_facebook_button_background_color_pressed">
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/resim"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/userimage" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true"
+        android:onClick="FotografDegistir"
+        android:text="Fotoğrafı Değiştir"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal|bold" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/yeme" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView16"
+        android:layout_marginTop="14dp"
+        android:paddingLeft="10dp"
+        android:text="Ad/Soyad" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/isim"
+        android:layout_marginTop="24dp"
+        android:paddingLeft="10dp"
+        android:text="Kullanıcı Adı" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/kad"
+        android:layout_marginTop="48dp"
+        android:paddingLeft="10dp"
+        android:text="Doğum Tarihi" />
+
+    <EditText
+        android:id="@+id/isim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView11"
+        android:layout_marginTop="19dp"
+        android:layout_toStartOf="@+id/imageView22"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/kad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/isim"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView13"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/dtarih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/kad"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView14"
+        android:layout_marginTop="34dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dtarih"
+        android:layout_toEndOf="@+id/dtarih"
+        android:onClick="Tarih"
+        app:srcCompat="@drawable/calender" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignParentStart="true"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/kosma1" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/resim"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/hayvanbes" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_toEndOf="@+id/resim"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/run" />
+
 </RelativeLayout>

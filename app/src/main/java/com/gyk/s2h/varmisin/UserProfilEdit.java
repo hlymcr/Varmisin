@@ -1,13 +1,18 @@
 package com.gyk.s2h.varmisin;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Map;
 
 public class UserProfilEdit extends AppCompatActivity {
@@ -29,7 +36,12 @@ public class UserProfilEdit extends AppCompatActivity {
     private KisiModel kisiModel;
     private DatabaseReference mDatabase;
     private Map<String, Object> postValues;
-    String kisiAd,adres,tel;
+    String kisiAd,kullanıcıAd,Dtarih;
+    public static final String IMAGE_TYPE = "image/*";
+    private static final int SELECT_SINGLE_PICTURE = 101;
+    private ImageView selectedImagePreview;
+    EditText isimET,kad,dtarih;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +50,9 @@ public class UserProfilEdit extends AppCompatActivity {
         setContentView(R.layout.activity_user_profil);
 
 
-        final EditText isimET = (EditText) findViewById(R.id.isim);
-        final EditText adresET = (EditText) findViewById(R.id.adres);
-        final EditText telET = (EditText) findViewById(R.id.tel);
+        isimET = (EditText) findViewById(R.id.isim);
+        kad = (EditText) findViewById(R.id.kad);
+        dtarih = (EditText) findViewById(R.id.dtarih);
         kaydet = (Button) findViewById(R.id.kayit);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -72,16 +84,16 @@ public class UserProfilEdit extends AppCompatActivity {
                 if (kisiModel == null) {
                     kisiModel = new KisiModel();
                     kisiModel.setAdSoyad(isimET.getText().toString());
-                    kisiModel.setAdres(adresET.getText().toString());
-                    kisiModel.setTel(telET.getText().toString());
+                    kisiModel.setKullanici_adi(kad.getText().toString());
+                    kisiModel.setDtarih(dtarih.getText().toString());
                     mDatabase.child("users").child(userID).setValue(kisiModel);
                     Toast.makeText(UserProfilEdit.this, "Kaydedildi", Toast.LENGTH_SHORT).show();
                     Log.i("SAVE", "saveEntry: Kaydedildi.");
 
                 } else {
                     kisiModel.setAdSoyad(isimET.getText().toString());
-                    kisiModel.setAdres(adresET.getText().toString());
-                    kisiModel.setTel(telET.getText().toString());
+                    kisiModel.setKullanici_adi(kad.getText().toString());
+                    kisiModel.setDtarih(dtarih.getText().toString());
                     postValues = kisiModel.toMap();
                     mDatabase.child("users").child(userID).updateChildren(postValues);
                     Toast.makeText(UserProfilEdit.this, "Güncellendi", Toast.LENGTH_SHORT).show();
@@ -102,11 +114,11 @@ public class UserProfilEdit extends AppCompatActivity {
                 else{
 
                     kisiAd= user.getAdSoyad();
-                    adres=user.getAdres();
-                    tel=user.getTel();
+                    kullanıcıAd=user.getKullanici_adi();
+                    Dtarih=user.getDtarih();
                     isimET.setText(kisiAd);
-                    adresET.setText(adres);
-                    telET.setText(tel);
+                    kad.setText(kullanıcıAd);
+                    dtarih.setText(Dtarih);
                 }
             }
 
@@ -120,5 +132,57 @@ public class UserProfilEdit extends AppCompatActivity {
 
 
 
+    }
+    public void FotografDegistir(View view){
+        Intent intent = new Intent();
+        intent.setType(IMAGE_TYPE);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), SELECT_SINGLE_PICTURE);
+
+
+        selectedImagePreview = (ImageView)findViewById(R.id.resim);
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_SINGLE_PICTURE) {
+
+                Uri selectedImageUri = data.getData();
+                Log.d("Urlİmage", String.valueOf(selectedImageUri));
+                try {
+                    selectedImagePreview.setImageBitmap(new UserPicture(selectedImageUri, getContentResolver()).getBitmap());
+                } catch (IOException e) {
+                    Log.e(MainActivity.class.getSimpleName(), "Failed to load image", e);
+                }
+                // original code
+                //String selectedImagePath = getPath(selectedImageUri);
+                //selectedImagePreview.setImageURI(selectedImageUri);
+            }
+
+        } else {
+            // report failure
+            Toast.makeText(getApplicationContext(), R.string.msg_failed_to_get_intent_data, Toast.LENGTH_LONG).show();
+            Log.d(MainActivity.class.getSimpleName(), "Failed to get intent data, result code is " + resultCode);
+        }
+    }
+    public void Tarih(View view){
+        //Datepicker
+        Calendar mcurrentTime = Calendar.getInstance();
+        int year = mcurrentTime.get(Calendar.YEAR);//Güncel Yılı alıyoruz
+        int month = mcurrentTime.get(Calendar.MONTH);//Güncel Ayı alıyoruz
+        int day = mcurrentTime.get(Calendar.DAY_OF_MONTH);//Güncel Günü alıyoruz
+        DatePickerDialog datePicker;//Datepicker objemiz
+        datePicker = new DatePickerDialog(UserProfilEdit.this, new DatePickerDialog.OnDateSetListener(){
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dtarih.setText(dayOfMonth + "/" + monthOfYear+ "/"+year);
+
+            }
+        },year,month,day);//başlarken set edilcek değerlerimizi atıyoruz
+        datePicker.setTitle("Tarih Seçiniz");
+        datePicker.setButton(DatePickerDialog.BUTTON_POSITIVE, "Ayarla", datePicker);
+        datePicker.setButton(DatePickerDialog.BUTTON_NEGATIVE, "İptal", datePicker);
+        datePicker.show();
     }
 }

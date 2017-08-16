@@ -13,7 +13,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <activity android:name="com.gyk.s2h.varmisin.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,20 +21,22 @@
             </intent-filter>
         </activity>
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1557261917653078"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider1557261917653078"
+            android:exported="true" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name="com.gyk.s2h.varmisin.SifremiHatirla" />
+        <activity android:name=".SifremiHatirla" />
         <activity
-            android:name="com.gyk.s2h.varmisin.NavigationDrawer"
+            android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.gyk.s2h.varmisin.UserProfilEdit" />
+        <activity android:name=".UserProfilEdit" />
+        <activity android:name=".Profil"></activity>
     </application>
 
 </manifest>
