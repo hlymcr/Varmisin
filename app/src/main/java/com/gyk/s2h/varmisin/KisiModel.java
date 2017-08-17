@@ -1,5 +1,7 @@
 package com.gyk.s2h.varmisin;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
