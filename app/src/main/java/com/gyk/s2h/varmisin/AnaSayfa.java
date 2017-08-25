@@ -3,12 +3,15 @@ package com.gyk.s2h.varmisin;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+//Kullanıcı Anasayfası Arkadaşlarımızın paylaştıkları iddialar burada!
 
 public class AnaSayfa extends Fragment implements
         GoogleApiClient.OnConnectionFailedListener {
@@ -23,7 +26,6 @@ public class AnaSayfa extends Fragment implements
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

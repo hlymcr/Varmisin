@@ -7,9 +7,9 @@
             android:icon="@drawable/profil"
             android:title="Profil" />
         <item
-            android:id="@+id/nav_iddialarim"
-            android:icon="@drawable/iddialarim"
-            android:title="İddialarım" />
+            android:id="@+id/nav_arkadasAra"
+            android:icon="@drawable/arkara"
+            android:title="Arkadaş Ara" />
         <item
             android:id="@+id/nav_armalar"
             android:icon="@drawable/kupa"

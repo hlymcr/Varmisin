@@ -10,15 +10,39 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/tab_layout"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tab_layout1" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_alignParentStart="true"
-        android:background="@color/com_smart_login_code">
+        android:background="@color/com_smart_login_code"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+
+            <ImageView
+                android:id="@+id/userpicture"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:padding="6dp"
+                android:src="@drawable/userimage" />
+
+
+        <TextView
+            android:id="@+id/isim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="false"
+            android:layout_marginStart="11dp"
+            android:text="isim"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/userpicture" />
 
     </RelativeLayout>
 
@@ -66,15 +90,6 @@
 
     </android.support.design.widget.TabLayout>
 
-    <ImageView
-        android:id="@+id/resim"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:onClick="ResimSec"
-        app:srcCompat="@drawable/userimage"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:id="@+id/btn_dzn"
         style="@style/Widget.AppCompat.Button.Small"
@@ -87,5 +102,37 @@
         android:textColor="@android:color/background_light"
         android:layout_above="@+id/tab_layout"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tab_layout1"
+        android:layout_alignStart="@+id/imageView14"
+        android:layout_marginStart="15dp"
+        android:text="Doğum Tarihi:" />
+
+    <TextView
+        android:id="@+id/dtarih"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tarih"
+        android:layout_above="@+id/tab_layout1"
+        android:layout_toEndOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/kullanici_adi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView15"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/btn_dzn"
+        android:text="kullanıcı adı"
+        android:textColor="?attr/colorBackgroundFloating" />
 
 </RelativeLayout>

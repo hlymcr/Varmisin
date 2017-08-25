@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_purple_900"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/resim"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/userimage" />
+
+    <LinearLayout
+        android:layout_width="87dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.72"
+        android:background="@color/md_purple_600"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adSoyad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/kullaniciAd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="?attr/colorButtonNormal"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -38,26 +41,19 @@ import java.util.Map;
 
 public class UserProfilEdit extends AppCompatActivity {
 
-    public static final int KITKAT_VALUE = 1002;
-
-
     Button kaydet;
-    public static String USER_ID = "com.example.hlymcr.tutumlulistem.main.USER_ID";
     private String userID;
     private KisiModel kisiModel;
     private DatabaseReference mDatabase;
     private Map<String, Object> postValues;
     String kisiAd,kullanıcıAd,Dtarih,kresim;
-    public static final String IMAGE_TYPE = "image/*";
     private static final int SELECT_SINGLE_PICTURE = 101;
     private ImageView selectedImagePreview;
     EditText isimET,kad,dtarih;
-    private StorageReference mStorage;
     Uri selectedImageUri;
     Uri secilenResim;
     ImageView resim;
     private static final String TAG = "UserProfilEdit";
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -72,12 +68,21 @@ public class UserProfilEdit extends AppCompatActivity {
 
 
 
+
         isimET = (EditText) findViewById(R.id.isim);
         kad = (EditText) findViewById(R.id.kad);
         dtarih = (EditText) findViewById(R.id.dtarih);
         resim=(ImageView)findViewById(R.id.resim);
         kaydet = (Button) findViewById(R.id.kayit);
         selectedImagePreview = (ImageView)findViewById(R.id.resim);
+
+
+        final Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.GRAY)
+                .borderWidthDp(3)
+                .cornerRadiusDp(30)
+                .oval(true)
+                .build();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -86,44 +91,22 @@ public class UserProfilEdit extends AppCompatActivity {
         Log.d("userID:", userID);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mStorage = FirebaseStorage.getInstance().getReference();
-
 
 
         kaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*String key = mDatabase.child("users").child(userID).push().getKey();
-
-                HashMap<String, String> result =new HashMap<>();
-                result.put("adSoyad",isimET.getText().toString());
-                result.put("adres",adresET.getText().toString());
-                result.put("telefon",telET.getText().toString());
-
-                Map<String,Object> childUpdate = new HashMap<String, Object>();
-                childUpdate.put("users/"+userID+"/"+key,result);
-                mDatabase.updateChildren(childUpdate);
-                Toast.makeText(UserProfilEdit.this, "Kaydedildi", Toast.LENGTH_SHORT).show();*/
 
                 if (kisiModel == null) {
                     kisiModel = new KisiModel();
                     kisiModel.setAdSoyad(isimET.getText().toString());
                     kisiModel.setKullanici_adi(kad.getText().toString());
                     kisiModel.setDtarih(dtarih.getText().toString());
+                    kisiModel.setUid(mDatabase.child("users").child(userID).toString());
                     kisiModel.setPath( String.valueOf(selectedImageUri));
-
                     mDatabase.child("users").child(userID).setValue(kisiModel);
-                    /*StorageReference filpath =mStorage.child("ProfilPicture").child(selectedImageUri.getLastPathSegment());
-                    filpath.putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Toast.makeText(UserProfilEdit.this, "Kaydedildi Resim", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });*/
                     Toast.makeText(UserProfilEdit.this, "Kaydedildi", Toast.LENGTH_SHORT).show();
                     Log.i("SAVE", "saveEntry: Kaydedildi.");
 
@@ -131,19 +114,10 @@ public class UserProfilEdit extends AppCompatActivity {
                     kisiModel.setAdSoyad(isimET.getText().toString());
                     kisiModel.setKullanici_adi(kad.getText().toString());
                     kisiModel.setDtarih(dtarih.getText().toString());
+                    kisiModel.setUid(mDatabase.child("users").child(userID).toString());
                     kisiModel.setPath( String.valueOf(selectedImageUri));
-
                     postValues = kisiModel.toMap();
                     mDatabase.child("users").child(userID).updateChildren(postValues);
-                    /*StorageReference filpath =mStorage.child("ProfilPicture").child(selectedImageUri.getLastPathSegment());
-                    filpath.putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            Toast.makeText(UserProfilEdit.this, "Kaydedildi Resim", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });*/
                     Toast.makeText(UserProfilEdit.this, "Güncellendi", Toast.LENGTH_SHORT).show();
                     Log.i("SAVE", "saveEntry: Güncellendi.");
 
@@ -169,9 +143,10 @@ public class UserProfilEdit extends AppCompatActivity {
                     kad.setText(kullanıcıAd);
                     dtarih.setText(Dtarih);
                     kresim=user.getPath();
-
                     secilenResim= Uri.parse(kresim);
-                    if(secilenResim!=null && selectedImagePreview!=null){
+                    Picasso.with(UserProfilEdit.this).load(secilenResim).fit().transform(transformation).into(resim);
+
+                    /*if(secilenResim!=null && selectedImagePreview!=null){
 
                         try {
                             selectedImagePreview.setImageBitmap(new UserPicture(secilenResim, getContentResolver()).getBitmap());
@@ -179,7 +154,7 @@ public class UserProfilEdit extends AppCompatActivity {
                             Log.e(MainActivity.class.getSimpleName(), "Failed to load image", e);
                         }
 
-                    }
+                    }*/
 
 
                 }
@@ -202,38 +177,20 @@ public class UserProfilEdit extends AppCompatActivity {
         i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_SINGLE_PICTURE);
 
-        /*Intent intent = new Intent();
-        intent.setType(IMAGE_TYPE);
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-        startActivityForResult(Intent.createChooser(intent,
-                "Select Picture"), SELECT_SINGLE_PICTURE);*/
-
-
-
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.GRAY)
+                .borderWidthDp(3)
+                .cornerRadiusDp(30)
+                .oval(true)
+                .build();
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_SINGLE_PICTURE) {
-
                 selectedImageUri = data.getData();
-                /*StorageReference filpath =mStorage.child("ProfilPicture").child(selectedImageUri.getLastPathSegment());
-                filpath.putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Picasso.with(UserProfilEdit.this).load(selectedImageUri).fit().transform(transformation).into(selectedImagePreview);
 
-                        Toast.makeText(UserProfilEdit.this, "", Toast.LENGTH_SHORT).show();
-
-                    }
-                });*/
-                Log.d("Urlİmage", String.valueOf(selectedImageUri));
-                try {
-                    selectedImagePreview.setImageBitmap(new UserPicture(selectedImageUri, getContentResolver()).getBitmap());
-                } catch (IOException e) {
-                    Log.e(MainActivity.class.getSimpleName(), "Failed to load image", e);
-                }
-                // original code
-                //String selectedImagePath = getPath(selectedImageUri);
-                //selectedImagePreview.setImageURI(selectedImageUri);
             }
 
         } else {

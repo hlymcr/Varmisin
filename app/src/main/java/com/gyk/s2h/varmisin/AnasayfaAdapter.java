@@ -1,4 +1,10 @@
 package com.gyk.s2h.varmisin;
+
+/**
+ * Created by HULYA on 18.08.2017.
+ */
+
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -6,12 +12,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 /**
  * Created by HULYA on 20.07.2017.
  */
-
-//Giriş ve Kaydol sayfamızın adaptörü
-public class PagerAdapter extends FragmentStatePagerAdapter {
+//Alt Bottom Navigation Adapter sayfası
+public class AnasayfaAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public AnasayfaAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
     }
@@ -21,11 +26,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                Giris tab1 = new Giris();
+                AnaSayfa tab1 = new AnaSayfa();
                 return tab1;
             case 1:
-                Kaydol tab2 = new Kaydol();
+                İddialarim tab2 = new İddialarim();
                 return tab2;
+            case 2:
+                Yapilacaklar tab3=new Yapilacaklar();
+                return tab3;
             default:
                 return null;
         }
@@ -35,4 +43,5 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mNumOfTabs;
     }
+
 }

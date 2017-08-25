@@ -28,15 +28,9 @@
         android:layout_marginBottom="372dp"
         android:background="@color/com_facebook_button_background_color_pressed">
 
+
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/resim"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_above="@+id/textView6"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/userimage" />
 
     <TextView
         android:id="@+id/textView6"
@@ -53,10 +47,12 @@
         android:id="@+id/imageView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
         android:alpha="0.1"
-        app:srcCompat="@drawable/yeme" />
+        app:srcCompat="@drawable/yeme"
+        android:layout_alignBottom="@+id/imageView16"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:id="@+id/textView11"
@@ -134,10 +130,11 @@
         android:id="@+id/imageView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/relativeLayout2"
-        android:layout_alignParentStart="true"
         android:alpha="0.1"
-        app:srcCompat="@drawable/kosma1" />
+        app:srcCompat="@drawable/kosma1"
+        android:layout_above="@+id/textView6"
+        android:layout_toEndOf="@+id/imageView17"
+        android:layout_marginBottom="15dp" />
 
     <ImageView
         android:id="@+id/imageView17"
@@ -156,5 +153,14 @@
         android:layout_toEndOf="@+id/resim"
         android:alpha="0.1"
         app:srcCompat="@drawable/run" />
+
+    <ImageView
+        android:id="@id/resim"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:padding="6dp"
+        android:src="@drawable/userimage" />
 
 </RelativeLayout>

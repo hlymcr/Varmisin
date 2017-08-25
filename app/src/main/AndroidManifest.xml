@@ -2,13 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gyk.s2h.varmisin">
 
-
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -29,13 +28,10 @@
             </intent-filter>
         </activity>
 
-
-
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider1557261917653078"
             android:exported="true" />
-
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -47,7 +43,10 @@
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme" />
         <activity android:name=".UserProfilEdit" />
-        <activity android:name=".Profil"></activity>
+        <activity android:name=".Profil" />
+        <activity android:name=".ArkadasAra" />
+        <activity android:name=".ArkadasIstekleri" />
+        <activity android:name=".ArkadasProfil"></activity>
     </application>
 
 </manifest>

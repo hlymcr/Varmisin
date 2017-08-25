@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by HULYA on 20.07.2017.
  */
 
-public class KisiModel implements Serializable {
+public class ArkadasModel implements Serializable {
 
     private String AdSoyad;
     private String kullanici_adi;
@@ -21,7 +21,7 @@ public class KisiModel implements Serializable {
     private String uid;
 
 
-    public KisiModel(String kullaniciAdi, String isim, String dTarih, String path, String uid) {
+    public ArkadasModel(String kullaniciAdi, String isim, String dTarih, String path, String uid) {
 
         this.kullanici_adi =kullaniciAdi;
         this.AdSoyad=isim;
@@ -31,7 +31,7 @@ public class KisiModel implements Serializable {
 
     }
 
-    public KisiModel() {
+    public ArkadasModel() {
 
     }
 

@@ -2,6 +2,8 @@ package com.gyk.s2h.varmisin;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,7 +20,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
@@ -28,6 +32,18 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.ncapdevi.fragnav.FragNavController;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
+import java.io.IOException;
+
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -37,7 +53,14 @@ public class NavigationDrawer extends AppCompatActivity
     private FirebaseAuth.AuthStateListener authStateListener;
     TextView email;
     Intent intent;
+    Uri secilenResim;
+    private String userID,kresim;
+    private KisiModel kisiModel;
+    private DatabaseReference mDatabase;
+    ImageView resim;
 
+    private FragNavController fragNavController;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +72,57 @@ public class NavigationDrawer extends AppCompatActivity
         NavigationView navigationVie = (NavigationView)findViewById(R.id.nav_view);
         View headerView = navigationVie.getHeaderView(0);
         email =(TextView)headerView.findViewById(R.id.email);
+        resim=(ImageView)headerView.findViewById(R.id.resim);
         Bundle extras = getIntent().getExtras();
         mAuth = FirebaseAuth.getInstance();
         String kullanici=extras.getString("kullanici");
         email.setText(kullanici);
         Log.d("kullanici",kullanici);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        userID = user.getUid();
+
+        Log.d("userID:", userID);
+
+        //Profil resmini oval yapmayı sağlayan metod.
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        final Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.BLUE)
+                .borderWidthDp(3)
+                .cornerRadiusDp(30)
+                .oval(true)
+                .build();
+
+
+        mDatabase.child("users").child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                KisiModel user = dataSnapshot.getValue(KisiModel.class);
+                if(user==null){
+
+                    Toast.makeText(NavigationDrawer.this, "Lütfen Profil bilgilerini ekleyiniz", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+
+                    kresim=user.getPath();
+                    Log.d("userpath",kresim);
+                    secilenResim= Uri.parse(kresim);
+                    Picasso.with(NavigationDrawer.this).load(secilenResim).fit().transform(transformation).into(resim);
+
+
+
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Hata","Hata mesajı");
+            }
+        });
 
 
 
@@ -81,16 +149,18 @@ public class NavigationDrawer extends AppCompatActivity
 
 
         //Alt navigation drawer
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+         bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener
+
+
+       bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = ArkadasAra.newInstance();
+                                selectedFragment = İddialarim.newInstance();
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = AnaSayfa.newInstance();
@@ -227,13 +297,20 @@ public class NavigationDrawer extends AppCompatActivity
             Intent intent = new Intent(this,Profil.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_iddialarim) {
+        } else if (id == R.id.nav_arkadasAra) {
+
+            Intent intent = new Intent(this,ArkadasAra.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_armalar) {
 
         }  else if (id == R.id.nav_vistek) {
 
+
         }   else if(id==R.id.nav_arkistek){
+            Intent intent=new Intent(this,ArkadasIstekleri.class);
+            startActivity(intent);
+
 
         }
 
@@ -246,4 +323,5 @@ public class NavigationDrawer extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 }

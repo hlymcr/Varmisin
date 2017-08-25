@@ -19,7 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 /**
  * Created by HULYA on 20.07.2017.
  */
-
+//Kullanıcı Profili Arkadaşlar sayfamız
 public class ProfilArkadaslar extends Fragment implements
         GoogleApiClient.OnConnectionFailedListener {
     @Nullable

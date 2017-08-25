@@ -1,6 +1,7 @@
 package com.gyk.s2h.varmisin;
 
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,7 +56,7 @@ public class Giris extends Fragment implements View.OnClickListener,
 
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
-
+    ActionBar actionBar;
     private SignInButton btnSignIn;
     private LoginButton facebookLogin;
     private CallbackManager callbackManager;
@@ -76,6 +77,7 @@ public class Giris extends Fragment implements View.OnClickListener,
 
         //Actionbar gizlenir.
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
 
 
 
@@ -197,32 +199,6 @@ public class Giris extends Fragment implements View.OnClickListener,
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
 
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
-                /*GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(
-                                    JSONObject user,
-                                    GraphResponse response) {
-
-
-                                // user_name.setText(response.toString());
-
-                                try {
-                                    Intent i = new Intent(getActivity(), NavigationDrawer.class);
-                                    startActivity(i);
-
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-                        });
-
-                request.executeAsync();*/
 
 
             }
@@ -407,11 +383,6 @@ public class Giris extends Fragment implements View.OnClickListener,
 
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
-        // [START_EXCLUDE silent]
-
-        // [END_EXCLUDE]
-
-
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
 
@@ -451,14 +422,6 @@ public class Giris extends Fragment implements View.OnClickListener,
 
 
                         }
-
-
-
-                        // [START_EXCLUDE]
-
-
-
-                        // [END_EXCLUDE]
 
                     }
 
