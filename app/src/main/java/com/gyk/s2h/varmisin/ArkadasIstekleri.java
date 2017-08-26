@@ -80,6 +80,7 @@ public class ArkadasIstekleri extends AppCompatActivity {
                     for (int i = 0; i < arrList.size(); i++) {
 
                         final DatabaseReference dbRef1 = database.getReference("users").child(arrList.get(i));
+                        final int finalI = i;
                         dbRef1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,10 +102,7 @@ public class ArkadasIstekleri extends AppCompatActivity {
                                         path = ds1.getValue().toString();
 
                                     }
-                                    if (ds1.getKey().toString().equals("uid")) {
-                                        uri = ds1.getValue().toString();
 
-                                    }
 
 
                                 /*String value = ds1.getKey().toString();
@@ -115,8 +113,9 @@ public class ArkadasIstekleri extends AppCompatActivity {
                                 Log.d("isim1", isim);
                                 Log.d("kullaniciAdi", kullaniciAdi);
                                 Log.d("dtarih", dtarih);
-                                Log.d("uri", uri);
+                                //Log.d("uri", uri);
                                 Log.d("path", path);
+                                uri=arrList.get(finalI);
 
                                 istekler.add(new ArkadasModel(isim, kullaniciAdi, dtarih, path, uri));
                                 Log.d("istekler", String.valueOf(istekler));

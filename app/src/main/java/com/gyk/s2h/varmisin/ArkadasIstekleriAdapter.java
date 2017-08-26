@@ -4,23 +4,30 @@ package com.gyk.s2h.varmisin;
  * Created by HULYA on 23.08.2017.
  */
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -31,7 +38,10 @@ public class ArkadasIstekleriAdapter extends BaseAdapter {
     ArrayList<ArkadasModel> kullaniciList;
     TextView kullaniciAdi, adSoyad;
     ImageView resim;
-    Context context;
+    FirebaseDatabase database;
+    private String userID;
+    private DatabaseReference mDatabase;
+    FloatingActionButton onay,sil;
 
 
     public ArkadasIstekleriAdapter(FragmentActivity activity, ArrayList<ArkadasModel> kullaniciList) {
@@ -59,9 +69,21 @@ public class ArkadasIstekleriAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ArkadasModel kisiModel = kullaniciList.get(i);
-        View satir = layoutInflater.inflate(R.layout.list_item2, null);
+        final View satir = layoutInflater.inflate(R.layout.arkadas_istekleri_list_item, null);
+
+
+        database = FirebaseDatabase.getInstance();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        userID = user.getUid();
+
+        Log.d("userID:", userID);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         //Profil resimlerini oval yapmayı sağlayan metod
         final Transformation transformation = new RoundedTransformationBuilder()
@@ -75,12 +97,76 @@ public class ArkadasIstekleriAdapter extends BaseAdapter {
         kullaniciAdi = (TextView) satir.findViewById(R.id.kullaniciAd);
         adSoyad = (TextView) satir.findViewById(R.id.adSoyad);
         resim = (ImageView) satir.findViewById(R.id.resim);
+        onay=(FloatingActionButton) satir.findViewById(R.id.onay);
+        sil=(FloatingActionButton)satir.findViewById(R.id.delete);
+
+
+
+        onay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String uid=kullaniciList.get(i).getUid();
+                Log.d("uid",uid);
+                mDatabase.child("arkadaslar").child(userID).push().setValue(uid);
+                mDatabase.child("arkadaslar").child(uid).push().setValue(userID);
+                final  DatabaseReference dbRef=FirebaseDatabase.getInstance().getReference().child("yistekler").child(userID);
+                dbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            String key =ds.getValue().toString();
+                            if(key.equals(uid)){
+                                ds.getRef().removeValue();
+                                Toast.makeText(satir.getContext(), "Onaylandı", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+
+        sil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String uid=kullaniciList.get(i).getUid();
+                Log.d("uid",uid);
+                final  DatabaseReference dbRef=FirebaseDatabase.getInstance().getReference().child("yistekler").child(userID);
+                dbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                       for(DataSnapshot ds : dataSnapshot.getChildren()){
+                           String key =ds.getValue().toString();
+                           if(key.equals(uid)){
+                               ds.getRef().removeValue();
+                               Toast.makeText(satir.getContext(), "Silindi", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+            }
+        });
 
         String secilenresim = kisiModel.getPath();
         Log.d("secilenresim",secilenresim);
         Uri secim = Uri.parse(secilenresim);
-
-
         Picasso.with(satir.getContext()).load(secim).fit().transform(transformation).into(resim);
 
         kullaniciAdi.setText(kisiModel.getKullanici_adi());

@@ -17,18 +17,17 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/com_smart_login_code"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:background="@color/md_deep_purple_100">
 
 
-
-            <ImageView
-                android:id="@+id/userpicture"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:padding="6dp"
-                android:src="@drawable/userimage" />
+        <ImageView
+            android:id="@+id/userpicture"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:padding="6dp"
+            android:src="@drawable/userimage" />
 
 
         <TextView
@@ -36,13 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="false"
-            android:layout_marginStart="11dp"
-            android:text="isim"
-            android:textColor="?attr/colorBackgroundFloating"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/userpicture" />
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/userpicture"
+            android:text="isim"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -86,7 +85,9 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView13"
-        android:background="@color/com_facebook_button_background_color_selected">
+        android:background="@color/md_purple_100"
+        app:tabIndicatorColor="@color/md_purple_900"
+        app:tabSelectedTextColor="@color/colorPrimary">
 
     </android.support.design.widget.TabLayout>
 
@@ -133,6 +134,6 @@
         android:layout_marginEnd="24dp"
         android:layout_toStartOf="@+id/btn_dzn"
         android:text="kullanıcı adı"
-        android:textColor="?attr/colorBackgroundFloating" />
+        android:textColor="?attr/actionMenuTextColor" />
 
 </RelativeLayout>

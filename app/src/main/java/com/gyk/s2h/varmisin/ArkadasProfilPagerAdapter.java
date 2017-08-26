@@ -1,9 +1,8 @@
 package com.gyk.s2h.varmisin;
 
 /**
- * Created by HULYA on 18.08.2017.
+ * Created by HULYA on 25.08.2017.
  */
-
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +11,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 /**
  * Created by HULYA on 20.07.2017.
  */
-//Alt Bottom Navigation Adapter sayfası
-public class AnasayfaAdapter extends FragmentStatePagerAdapter {
+
+public class ArkadasProfilPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
-    public AnasayfaAdapter(FragmentManager fm, int NumOfTabs) {
+    public ArkadasProfilPagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
     }
@@ -26,13 +25,13 @@ public class AnasayfaAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                AnaSayfa tab1 = new AnaSayfa();
+                ArkadasProfilAnasayfa tab1 = new ArkadasProfilAnasayfa();
                 return tab1;
             case 1:
-                Iddialarim tab2 = new Iddialarim();
+                ArkadasProfilArkadaslar tab2 = new ArkadasProfilArkadaslar();
                 return tab2;
             case 2:
-                Yapilacaklar tab3=new Yapilacaklar();
+                ArkadasProfilArmalar tab3=new ArkadasProfilArmalar();
                 return tab3;
             default:
                 return null;
@@ -43,5 +42,4 @@ public class AnasayfaAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mNumOfTabs;
     }
-
 }

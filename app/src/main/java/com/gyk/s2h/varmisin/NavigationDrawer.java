@@ -42,8 +42,6 @@ import com.ncapdevi.fragnav.FragNavController;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.io.IOException;
-
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -88,7 +86,7 @@ public class NavigationDrawer extends AppCompatActivity
         //Profil resmini oval yapmayı sağlayan metod.
         mDatabase = FirebaseDatabase.getInstance().getReference();
         final Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.BLUE)
+                .borderColor(Color.GRAY)
                 .borderWidthDp(3)
                 .cornerRadiusDp(30)
                 .oval(true)
@@ -160,7 +158,7 @@ public class NavigationDrawer extends AppCompatActivity
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = İddialarim.newInstance();
+                                selectedFragment = Iddialarim.newInstance();
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = AnaSayfa.newInstance();

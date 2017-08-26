@@ -1,15 +1,11 @@
 package com.gyk.s2h.varmisin;
 
-/**
- * Created by HULYA on 16.08.2017.
- */
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,30 +27,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HULYA on 20.07.2017.
+ * Created by HULYA on 25.08.2017.
  */
-//Kullanıcı Profili Arkadaşlar sayfamız
-public class ProfilArkadaslar extends Fragment implements
-        GoogleApiClient.OnConnectionFailedListener {
 
+public class ArkadasProfilArkadaslar extends Fragment  {
     ListView listView;
     FirebaseDatabase database;
     private String userID;
-    KullaniciArkadaslariAdapter adapter;
+    ArkadaslarAdapter adapter;
     private DatabaseReference mDatabase;
     String isim,kullaniciAdi,dtarih,path,uri;
     List<String> arrList = new ArrayList<String>();
     final ArrayList<ArkadasModel> arkadaslar = new ArrayList<ArkadasModel>();
 
-
-    @Nullable
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         database = FirebaseDatabase.getInstance();
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -64,14 +55,20 @@ public class ProfilArkadaslar extends Fragment implements
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
     }
 
+    @Nullable
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.profil_arkadaslar, container, false);
+        final View view = inflater.inflate(R.layout.arkadasprofilarkadaslar, container, false);
+
         listView=(ListView)view.findViewById(R.id.listview);
 
-        final DatabaseReference dbRef =database.getReference("arkadaslar").child(userID);
+
+        ArkadasProfil activity = (ArkadasProfil) getActivity();
+        String key=activity.getMyData();
+        
+        final DatabaseReference dbRef =database.getReference("arkadaslar").child(key);
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -131,7 +128,7 @@ public class ProfilArkadaslar extends Fragment implements
 
                                 arkadaslar.add(new ArkadasModel(isim, kullaniciAdi, dtarih, path, uri));
                                 Log.d("istekler", String.valueOf(arkadaslar));
-                                adapter = new KullaniciArkadaslariAdapter(view.getContext(), arkadaslar);
+                                adapter = new ArkadaslarAdapter(view.getContext(), arkadaslar);
                                 listView.setAdapter(adapter);
 
 
@@ -167,15 +164,8 @@ public class ProfilArkadaslar extends Fragment implements
 
 
 
-
-
-
         return view;
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
 }

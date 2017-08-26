@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gyk.s2h.varmisin.YuruyusDetay">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/isim"
+        android:layout_marginTop="29dp"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:id="@+id/textInputLayout3">
+
+        <EditText
+            android:id="@+id/sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Süre(saat)"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/gif"
+        android:layout_alignParentStart="true"
+        android:background="@color/primary"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"></LinearLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#1f1f14"
+        android:src="@drawable/giphy" />
+
+    <TextView
+        android:id="@+id/isim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="TextView"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/linearLayout" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayout3"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:id="@+id/textInputLayout4">
+
+        <EditText
+            android:id="@+id/adim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Adım sayısı"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/Vistek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="87dp"
+        android:background="@color/accent"
+        android:text="Var mısın?"
+        android:textColor="@android:color/background_light"
+        android:layout_below="@+id/textInputLayout4"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_marginStart="30dp" />
+
+</RelativeLayout>

@@ -59,7 +59,6 @@ public class UserProfilEdit extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profil);
 
@@ -79,8 +78,8 @@ public class UserProfilEdit extends AppCompatActivity {
 
         final Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.GRAY)
-                .borderWidthDp(3)
-                .cornerRadiusDp(30)
+                .borderWidthDp(4)
+                .cornerRadiusDp(35)
                 .oval(true)
                 .build();
 
@@ -104,7 +103,7 @@ public class UserProfilEdit extends AppCompatActivity {
                     kisiModel.setKullanici_adi(kad.getText().toString());
                     kisiModel.setDtarih(dtarih.getText().toString());
                     kisiModel.setUid(mDatabase.child("users").child(userID).toString());
-                    kisiModel.setPath( String.valueOf(selectedImageUri));
+                    kisiModel.setPath(String.valueOf(selectedImageUri));
                     mDatabase.child("users").child(userID).setValue(kisiModel);
 
                     Toast.makeText(UserProfilEdit.this, "Kaydedildi", Toast.LENGTH_SHORT).show();
@@ -145,16 +144,6 @@ public class UserProfilEdit extends AppCompatActivity {
                     kresim=user.getPath();
                     secilenResim= Uri.parse(kresim);
                     Picasso.with(UserProfilEdit.this).load(secilenResim).fit().transform(transformation).into(resim);
-
-                    /*if(secilenResim!=null && selectedImagePreview!=null){
-
-                        try {
-                            selectedImagePreview.setImageBitmap(new UserPicture(secilenResim, getContentResolver()).getBitmap());
-                        } catch (IOException e) {
-                            Log.e(MainActivity.class.getSimpleName(), "Failed to load image", e);
-                        }
-
-                    }*/
 
 
                 }

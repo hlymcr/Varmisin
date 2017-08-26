@@ -1,6 +1,8 @@
 package com.gyk.s2h.varmisin;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import java.util.Map;
 
 //Arkadaşlarımızın Profil sayfası
 public class ArkadasProfil extends AppCompatActivity {
+    private  String value ;
     private String userID;
     private KisiModel kisiModel;
     private DatabaseReference mDatabase;
@@ -48,7 +51,7 @@ public class ArkadasProfil extends AppCompatActivity {
     private ImageView selectedImagePreview;
     String kisiAd, kullanıcıAd, Dtarih, kresim;
     private Map<String, Object> postValues;
-    private FloatingActionButton arkekle;
+    private FloatingActionButton arkekle,vistek;
     FirebaseDatabase database;
     List<String> arrList = new ArrayList<String>();
     boolean arkistek=true;
@@ -57,6 +60,8 @@ public class ArkadasProfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arkadas_profil);
+
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -85,8 +90,22 @@ public class ArkadasProfil extends AppCompatActivity {
         dtarih = (TextView) findViewById(R.id.dtarih);
         selectedImagePreview = (ImageView) findViewById(R.id.userpicture);
         Bundle extras = getIntent().getExtras();
-        final String value = extras.getString("kuid");
+        value = extras.getString("kuid");
+
+
         arkekle = (FloatingActionButton) findViewById(R.id.arkekle);
+        vistek=(FloatingActionButton)findViewById(R.id.vistek);
+
+        //Varmısın İstek butonuna tıklandığında;
+        vistek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),IddiaTanimlari.class);
+                intent.putExtra("Uid",value);
+                startActivity(intent);
+            }
+        });
+
         final DatabaseReference dbRef = database.getReference("yistekler").child(value);
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -181,7 +200,7 @@ public class ArkadasProfil extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final ProfilPagerAdapter adapter = new ProfilPagerAdapter
+        final ArkadasProfilPagerAdapter adapter = new ArkadasProfilPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -201,7 +220,14 @@ public class ArkadasProfil extends AppCompatActivity {
 
             }
         });
+        Log.d("value1",value);
     }
+
+    public String getMyData() {
+        return value;
+    }
+
+
 
 
     @Override

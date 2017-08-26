@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/com_facebook_button_background_color_disabled"
+    android:background="@color/md_deep_purple_50"
     tools:context="com.gyk.s2h.varmisin.UserProfilEdit">
 
 
@@ -26,7 +26,7 @@
         android:layout_above="@+id/kayit"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="372dp"
-        android:background="@color/com_facebook_button_background_color_pressed">
+        android:background="@color/md_deep_purple_300">
 
 
     </RelativeLayout>
@@ -47,12 +47,12 @@
         android:id="@+id/imageView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.1"
-        app:srcCompat="@drawable/yeme"
         android:layout_alignBottom="@+id/imageView16"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="34dp"
-        android:layout_marginBottom="10dp" />
+        android:alpha="0.1"
+        app:srcCompat="@drawable/yeme" />
 
     <TextView
         android:id="@+id/textView11"
@@ -130,11 +130,11 @@
         android:id="@+id/imageView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.1"
-        app:srcCompat="@drawable/kosma1"
         android:layout_above="@+id/textView6"
+        android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/imageView17"
-        android:layout_marginBottom="15dp" />
+        android:alpha="0.1"
+        app:srcCompat="@drawable/kosma1" />
 
     <ImageView
         android:id="@+id/imageView17"
