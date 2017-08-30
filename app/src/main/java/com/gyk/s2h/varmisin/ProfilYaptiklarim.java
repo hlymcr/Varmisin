@@ -21,8 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
  * Created by HULYA on 20.07.2017.
  */
 
-public class ProfilYaptiklarim extends Fragment implements
-        GoogleApiClient.OnConnectionFailedListener {
+public class ProfilYaptiklarim extends Fragment {
     @Nullable
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,8 +35,5 @@ public class ProfilYaptiklarim extends Fragment implements
         return view;
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+   
 }

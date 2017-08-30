@@ -304,6 +304,9 @@ public class NavigationDrawer extends AppCompatActivity
 
         }  else if (id == R.id.nav_vistek) {
 
+            Intent intent =new Intent(this,VarmisinYIstekleri.class);
+            startActivity(intent);
+
 
         }   else if(id==R.id.nav_arkistek){
             Intent intent=new Intent(this,ArkadasIstekleri.class);

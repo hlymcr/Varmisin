@@ -1,21 +1,9 @@
 package com.gyk.s2h.varmisin;
 
-/**
- * Created by HULYA on 26.08.2017.
- */
-/**
- * Created by HULYA on 23.07.2017.
- */
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,29 +17,23 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//İddialarım sayfası.
-public class Iddialarim extends Fragment implements View.OnClickListener {
+public class VarmisinYIstekleri extends AppCompatActivity {
+
     ListView listView;
     FirebaseDatabase database;
     private String userID;
-    IddialarimAdapter adapter;
+    VarmisinYIstekleriAdapter adapter;
     private DatabaseReference mDatabase;
     String isim,sureS,adimS,uid;
-    String istek;
-    List<String> iddiaListY = new ArrayList<String>();
-    final ArrayList<YuruyusModel> Yiddialar = new ArrayList<YuruyusModel>();
-
-
-    public static Iddialarim newInstance() {
-        Iddialarim fragment = new Iddialarim();
-        return fragment;
-
-
-    }
+    String istek="";
+    List<String> isteklerListY = new ArrayList<String>();
+    final ArrayList<YuruyusModel> Yistekler = new ArrayList<YuruyusModel>();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_varmisin_istekleri);
+        listView=(ListView)findViewById(R.id.listview);
 
         database = FirebaseDatabase.getInstance();
 
@@ -64,20 +46,9 @@ public class Iddialarim extends Fragment implements View.OnClickListener {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-    }
-    public Iddialarim(){
 
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.iddilarim, container, false);
+        final DatabaseReference dbRef =database.getReference("adimIstek").child(userID);
 
-        listView=(ListView)view.findViewById(R.id.listview);
-
-
-
-        final DatabaseReference dbRef =database.getReference("adimIddia").child(userID);
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -87,7 +58,7 @@ public class Iddialarim extends Fragment implements View.OnClickListener {
                     uid=ds.child("uid").getValue().toString();
 
                     Log.d("uidd",uid);
-                    DatabaseReference dbRef1 =database.getReference("adimIddia").child(userID).child(uid);
+                    DatabaseReference dbRef1 =database.getReference("adimIstek").child(userID).child(uid);
 
                     dbRef1.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -109,7 +80,7 @@ public class Iddialarim extends Fragment implements View.OnClickListener {
                                     adimS=ds1.getValue().toString();
 
                                 }
-                                if (ds1.getKey().toString().equals("istek")){
+                                if(ds1.getKey().toString().equals("istek")){
                                     istek=ds1.getValue().toString();
                                 }
 
@@ -118,9 +89,9 @@ public class Iddialarim extends Fragment implements View.OnClickListener {
                             /*Log.d("isim",isim);
                             Log.d("adimS",adimS);
                             Log.d("sures",sureS);*/
-                            Yiddialar.add(new YuruyusModel(isim, sureS, adimS, uid,istek));
-                            Log.d("Yiddialar", String.valueOf(Yiddialar));
-                            adapter = new IddialarimAdapter((FragmentActivity) view.getContext(), Yiddialar);
+                            Yistekler.add(new YuruyusModel(isim, sureS, adimS, uid,istek));
+                            Log.d("Yiddialar", String.valueOf(Yistekler));
+                            adapter = new VarmisinYIstekleriAdapter(VarmisinYIstekleri.this, Yistekler);
                             listView.setAdapter(adapter);
 
 
@@ -141,27 +112,14 @@ public class Iddialarim extends Fragment implements View.OnClickListener {
 
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent =new Intent(view.getContext(),YuruyusDetayKabul.class);
-                startActivity(intent);
 
 
-            }
-        });
 
-        return view;
-    }
-
-    @Override
-    public void onClick(View view) {
 
     }
 }

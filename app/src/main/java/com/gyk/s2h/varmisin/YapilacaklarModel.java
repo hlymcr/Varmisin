@@ -1,5 +1,8 @@
 package com.gyk.s2h.varmisin;
 
+/**
+ * Created by HULYA on 28.08.2017.
+ */
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,23 +11,23 @@ import java.util.Map;
  * Created by HULYA on 26.08.2017.
  */
 
-public class YuruyusModel implements Serializable{
+public class YapilacaklarModel implements Serializable{
 
     private String isim;
     private String sure;
     private String adimS;
     private String uid;
-    private String istek;
+    private String saat;
 
 
 
 
-    public YuruyusModel(String isim,String sure,String adimS,String uid,String istek){
+    public YapilacaklarModel(String isim,String sure,String adimS,String uid,String saat){
         this.isim=isim;
         this.sure=sure;
         this.adimS=adimS;
         this.uid=uid;
-        this.istek=istek;
+        this.saat=saat;
 
     }
     public String getIsim() {
@@ -60,12 +63,12 @@ public class YuruyusModel implements Serializable{
         this.uid = uid;
     }
 
-    public String getIstek() {
-        return istek;
+    public String getSaat() {
+        return saat;
     }
 
-    public void setIstek(String istek) {
-        this.istek = istek;
+    public void setSaat(String istek) {
+        this.saat = saat;
     }
 
     public Map<String, Object> toMap() {
@@ -80,7 +83,7 @@ public class YuruyusModel implements Serializable{
 
         result.put("uid", uid);
 
-        result.put("istek",istek);
+        result.put("saat",saat);
 
 
         return result;

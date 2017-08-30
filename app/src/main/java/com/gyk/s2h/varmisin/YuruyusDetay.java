@@ -23,12 +23,14 @@ import com.google.firebase.database.ValueEventListener;
 public class YuruyusDetay extends AppCompatActivity {
     FirebaseDatabase database;
     private DatabaseReference mDatabase;
-    String userID,isim;
+    String userID,isim,isim1;
     EditText sure,adimS;
     Button Vistek;
-    private YuruyusModel yuruyusModel;
+    private YuruyusModel yuruyusModel,yuruyusModel1;
     String uid="";
+    String istek="";
     TextView adSoyad;
+
 
 
 
@@ -67,9 +69,30 @@ public class YuruyusDetay extends AppCompatActivity {
                     if(ds.getKey().toString().equals("adSoyad")){
                         isim=ds.getValue().toString();
                     }
+
                 }
                 Log.d("issim",isim);
                 adSoyad.setText(isim);
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        final DatabaseReference dbRef1 =database.getReference("users").child(userID);
+        dbRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    if(ds.getKey().toString().equals("adSoyad")){
+                        isim1=ds.getValue().toString();
+                    }
+                }
+                Log.d("issim",isim1);
 
             }
 
@@ -117,8 +140,10 @@ public class YuruyusDetay extends AppCompatActivity {
 
 
                         Log.d("uidim",uid);
-                        yuruyusModel=new YuruyusModel(sureS,adimSayisi,uid);
-                        mDatabase.child("adimIstek").child(userID).push().setValue(yuruyusModel);
+                        yuruyusModel=new YuruyusModel(isim,sureS,adimSayisi,uid,istek);
+                        yuruyusModel1=new YuruyusModel(isim1,sureS,adimSayisi,userID,istek);
+                        mDatabase.child("adimIddia").child(userID).child(uid).setValue(yuruyusModel);
+                        mDatabase.child("adimIstek").child(uid).child(userID).setValue(yuruyusModel1);
                         Toast.makeText(YuruyusDetay.this, "İstek gönderildi.", Toast.LENGTH_SHORT).show();
 
 

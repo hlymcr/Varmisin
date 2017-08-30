@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_purple_50"
+    tools:context="com.gyk.s2h.varmisin.YuruyusDetayKabul">
+
+    <TextView
+        android:id="@+id/txtAdim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="ADIM"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+    <TextView
+        android:id="@+id/adim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/isim"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="99dp"
+        android:text="0"
+        android:textSize="100sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="445dp"
+        android:background="@color/accent">
+
+        <ImageView
+            android:id="@+id/aresim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/userimage"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/isaret"
+        android:layout_alignTop="@+id/kresim"
+        android:layout_toEndOf="@+id/relativeLayout3" />
+
+    <ImageView
+        android:id="@+id/kresim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="37dp"
+        android:layout_marginTop="27dp"
+        app:srcCompat="@drawable/userimage" />
+
+    <TextView
+        android:id="@+id/isim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout3"
+        android:layout_alignEnd="@+id/relativeLayout3"
+        android:layout_marginEnd="55dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adım Sayısı"
+        android:layout_below="@+id/adim"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        app:srcCompat="@drawable/walk"
+        android:layout_above="@+id/txtAdim"
+        android:layout_alignEnd="@+id/textView19" />
+
+</RelativeLayout>

@@ -1,11 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_deep_orange_50"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context="com.gyk.s2h.varmisin.Yolladiklarim">
 
 
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="141dp"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/yuruyus1" />
+
+    <ImageView
+        android:id="@+id/imageView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="58dp"
+        android:layout_toEndOf="@+id/imageView24"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/yemek1" />
+
+    <ImageView
+        android:id="@+id/imageView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="81dp"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/imageView24"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/muzik" />
+
+    <ImageView
+        android:id="@+id/imageView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="25dp"
+        android:layout_toStartOf="@+id/imageView38"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/resim2" />
+
+    <ImageView
+        android:id="@+id/imageView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView40"
+        android:layout_marginBottom="23dp"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/guzelisler1" />
+
+    <ImageView
+        android:id="@+id/imageView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView24"
+        android:layout_alignStart="@+id/imageView38"
+        android:layout_marginStart="41dp"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/guzelisler" />
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="19dp"
+        android:alpha="0.1"
+        app:srcCompat="@drawable/yuruyus3" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/imageView38" />
 </RelativeLayout>
