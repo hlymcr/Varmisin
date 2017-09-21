@@ -122,11 +122,11 @@ public class ProfilArkadaslar extends Fragment implements
                                 arrList1.add(value);*/
 
                                 }
-                                Log.d("isim1", isim);
+                             /*   Log.d("isim1", isim);
                                 Log.d("kullaniciAdi", kullaniciAdi);
                                 Log.d("dtarih", dtarih);
                                 //Log.d("uri", uri);
-                                Log.d("path", path);
+                                Log.d("path", path);*/
                                 uri=arrList.get(finalI);
 
                                 arkadaslar.add(new ArkadasModel(isim, kullaniciAdi, dtarih, path, uri));

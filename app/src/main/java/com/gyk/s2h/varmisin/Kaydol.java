@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -68,6 +69,7 @@ public class Kaydol extends Fragment {
 
                 }
 
+
                 auth.createUserWithEmailAndPassword(Email,Sifre).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,6 +96,7 @@ public class Kaydol extends Fragment {
 
             }
         });
+
 
         return view;
     }

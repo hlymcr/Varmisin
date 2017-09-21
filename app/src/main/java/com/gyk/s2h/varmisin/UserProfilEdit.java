@@ -63,11 +63,6 @@ public class UserProfilEdit extends AppCompatActivity {
         setContentView(R.layout.activity_user_profil);
 
 
-       checkFilePermissions();
-
-
-
-
         isimET = (EditText) findViewById(R.id.isim);
         kad = (EditText) findViewById(R.id.kad);
         dtarih = (EditText) findViewById(R.id.dtarih);
@@ -210,16 +205,5 @@ public class UserProfilEdit extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkFilePermissions() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
-            int permissionCheck = UserProfilEdit.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-            permissionCheck += UserProfilEdit.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
-            if (permissionCheck != 0) {
-                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
-            }
-        }else{
-            Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
-        }
-    }
+
 }

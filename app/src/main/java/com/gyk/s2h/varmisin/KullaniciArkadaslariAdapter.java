@@ -93,7 +93,7 @@ public class KullaniciArkadaslariAdapter extends BaseAdapter {
         resim = (ImageView) satir.findViewById(R.id.resim);
 
         String secilenresim = arkadasModel.getPath();
-        Log.d("secilenresim", secilenresim);
+//        Log.d("secilenresim", secilenresim);
         Uri secim = Uri.parse(secilenresim);
         Picasso.with(satir.getContext()).load(secim).fit().transform(transformation).into(resim);
 

@@ -3,8 +3,10 @@ package com.gyk.s2h.varmisin;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -60,6 +62,7 @@ public class Giris extends Fragment implements View.OnClickListener,
     private SignInButton btnSignIn;
     private LoginButton facebookLogin;
     private CallbackManager callbackManager;
+    SharedPreferences sp;
 
 
     EditText kullaniciEt, sifreEt;
@@ -87,6 +90,14 @@ public class Giris extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.giris, container, false);
+        sp=getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        if(sp.contains("email")){
+            Intent i = new Intent(getActivity(), NavigationDrawer.class);
+            getContext().startActivity(i);
+            getActivity().finish();   //finish current activity
+        }
+
+
 
 
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -219,7 +230,7 @@ public class Giris extends Fragment implements View.OnClickListener,
 
     private void girisYap() {
 
-        String email = kullaniciEt.getText().toString();
+        final String email = kullaniciEt.getText().toString();
         final String parola = sifreEt.getText().toString();
         if (TextUtils.isEmpty(email)) {
 
@@ -247,10 +258,15 @@ public class Giris extends Fragment implements View.OnClickListener,
                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     Log.d("email",user.getEmail());
                     String kullanici=user.getEmail();
+                    SharedPreferences.Editor e=sp.edit();
+                    e.putString("email",email);
+                    e.putString("parola",parola);
+                    e.commit();
                     Toast.makeText(getActivity(), "Giriş yapıldı", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(getActivity(), NavigationDrawer.class);
                     i.putExtra("kullanici",kullanici);
                     startActivity(i);
+                    getActivity().finish();
                 } else {
                     Log.e("Giriş Hatası", task.getException().getMessage());
                     Toast.makeText(getActivity(), "Kullanıcı adı veya şifre başarısız", Toast.LENGTH_LONG).show();
@@ -352,10 +368,15 @@ public class Giris extends Fragment implements View.OnClickListener,
                             String kullanici=user.getEmail();
                             Log.d("email",user.getEmail());
                             Log.d(TAG, "signInWithCredential:success");
+                            SharedPreferences.Editor e=sp.edit();
+                            e.putString("email",user.getEmail());
+                            e.commit();
                             Toast.makeText(getActivity(), "Giriş başarılı", Toast.LENGTH_SHORT).show();
+
                             Intent intent =new Intent(getActivity(),NavigationDrawer.class);
                             intent.putExtra("kullanici",kullanici);
                             startActivity(intent);
+                            getActivity().finish();
 
 
 
@@ -404,10 +425,14 @@ public class Giris extends Fragment implements View.OnClickListener,
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String kullanici =user.getDisplayName();
                             Log.d("email",user.getDisplayName());
+                            SharedPreferences.Editor e=sp.edit();
+                            e.putString("email",user.getDisplayName());
+                            e.commit();
                             Toast.makeText(getActivity(), "Giriş başarılı", Toast.LENGTH_SHORT).show();
                             Intent intent =new Intent(getActivity(),NavigationDrawer.class);
                             intent.putExtra("kullanici",kullanici);
                             startActivity(intent);
+                            getActivity().finish();
 
                         } else {
 

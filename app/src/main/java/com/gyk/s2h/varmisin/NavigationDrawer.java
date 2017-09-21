@@ -1,7 +1,11 @@
 package com.gyk.s2h.varmisin;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,6 +61,7 @@ public class NavigationDrawer extends AppCompatActivity
     private DatabaseReference mDatabase;
     ImageView resim;
 
+
     private FragNavController fragNavController;
     BottomNavigationView bottomNavigationView;
 
@@ -71,11 +76,16 @@ public class NavigationDrawer extends AppCompatActivity
         View headerView = navigationVie.getHeaderView(0);
         email =(TextView)headerView.findViewById(R.id.email);
         resim=(ImageView)headerView.findViewById(R.id.resim);
-        Bundle extras = getIntent().getExtras();
+
         mAuth = FirebaseAuth.getInstance();
-        String kullanici=extras.getString("kullanici");
-        email.setText(kullanici);
-        Log.d("kullanici",kullanici);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            String kullanici=extras.getString("kullanici");
+            email.setText(kullanici);
+            Log.d("kullanici",kullanici);
+        }
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -214,9 +224,13 @@ public class NavigationDrawer extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which) {
 
                 signOut();
+                SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
+                SharedPreferences.Editor e=sp.edit();
+                e.clear();
+                e.commit();
                 Intent intent2 = new Intent(NavigationDrawer.this,MainActivity.class);
-
                 startActivity(intent2);
+                finish();
 
             }
 
