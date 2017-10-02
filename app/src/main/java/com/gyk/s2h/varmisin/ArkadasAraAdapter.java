@@ -3,6 +3,7 @@ package com.gyk.s2h.varmisin;
 /**
  * Created by HULYA on 18.08.2017.
  */
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,12 +23,20 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import android.content.Context;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,17 +49,18 @@ public class ArkadasAraAdapter extends BaseAdapter implements Filterable {
 
     LayoutInflater layoutInflater;
     ArrayList<KisiModel> kullaniciList;
-    TextView kullaniciAdi,adSoyad;
+    TextView kullaniciAdi, adSoyad;
     ImageView resim;
     Context context;
+
 
 
     //Arkadaş Arama için Listemizi doldurmayı sağladığımız adaptörümüz..
 
     public ArkadasAraAdapter(FragmentActivity activity, ArrayList<KisiModel> kullaniciList) {
 
-        layoutInflater =(LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.kullaniciList =kullaniciList;
+        layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.kullaniciList = kullaniciList;
 
     }
 
@@ -73,8 +83,9 @@ public class ArkadasAraAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-       KisiModel kisiModel =kullaniciList.get(i);
-        View satir =layoutInflater.inflate(R.layout.list_item,null);
+        KisiModel kisiModel = kullaniciList.get(i);
+
+        View satir = layoutInflater.inflate(R.layout.list_item, null);
 
         //Resmi oval yapmak için kullanılan metod
         final Transformation transformation = new RoundedTransformationBuilder()
@@ -84,16 +95,17 @@ public class ArkadasAraAdapter extends BaseAdapter implements Filterable {
                 .oval(true)
                 .build();
 
-        kullaniciAdi=(TextView)satir.findViewById(R.id.kullaniciAd);
-        adSoyad = (TextView)satir.findViewById(R.id.adSoyad);
-        resim=(ImageView)satir.findViewById(R.id.resim);
-        String secilenresim=kisiModel.getPath();
-        Uri secim=Uri.parse(secilenresim);
+        kullaniciAdi = (TextView) satir.findViewById(R.id.kullaniciAd);
+        adSoyad = (TextView) satir.findViewById(R.id.adSoyad);
+        resim = (ImageView) satir.findViewById(R.id.resim);
+        String secilenresim = kisiModel.getPath();
+        Uri secim = Uri.parse(secilenresim);
+
         Picasso.with(satir.getContext()).load(secim).fit().transform(transformation).into(resim);
+
 
         kullaniciAdi.setText(kisiModel.getKullanici_adi());
         adSoyad.setText(kisiModel.getAdSoyad());
-
 
 
         return satir;
@@ -106,31 +118,30 @@ public class ArkadasAraAdapter extends BaseAdapter implements Filterable {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                FilterResults results =new FilterResults();
+                FilterResults results = new FilterResults();
 
-                if(charSequence==null || charSequence.length()==0){
-                    results.values=kullaniciList;
-                    results.count=kullaniciList.size();
-                }
-                else{
-                    ArrayList<KisiModel> filterResultData =new ArrayList<>();
+                if (charSequence == null || charSequence.length() == 0) {
+                    results.values = kullaniciList;
+                    results.count = kullaniciList.size();
+                } else {
+                    ArrayList<KisiModel> filterResultData = new ArrayList<>();
 
-                    for (KisiModel data:kullaniciList){
+                    for (KisiModel data : kullaniciList) {
 
-                        if(data.getKullanici_adi().toUpperCase().contains(charSequence.toString().toUpperCase())){
+                        if (data.getKullanici_adi().toUpperCase().contains(charSequence.toString().toUpperCase())) {
                             filterResultData.add(data);
                         }
                     }
-                    results.values=filterResultData;
-                    results.count=filterResultData.size();
+                    results.values = filterResultData;
+                    results.count = filterResultData.size();
                 }
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    kullaniciList=(ArrayList<KisiModel>) filterResults.values;
-                    notifyDataSetChanged();
+                kullaniciList = (ArrayList<KisiModel>) filterResults.values;
+                notifyDataSetChanged();
             }
         };
     }

@@ -140,12 +140,6 @@ public class YuruyusDetayKabul extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     KisiModel user = dataSnapshot.getValue(KisiModel.class);
-                    if(user==null){
-
-                        Toast.makeText(rootView.getContext(), "Lütfen Profil bilgilerini ekleyiniz", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else{
 
                         path=user.getPath();
                         Log.d("userpath",path);
@@ -154,7 +148,7 @@ public class YuruyusDetayKabul extends AppCompatActivity {
 
 
 
-                    }
+
 
 
                 }
@@ -170,21 +164,11 @@ public class YuruyusDetayKabul extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     KisiModel user = dataSnapshot.getValue(KisiModel.class);
-                    if(user==null){
-
-                        Toast.makeText(rootView.getContext(), "Lütfen Profil bilgilerini ekleyiniz", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else{
 
                         path1=user.getPath();
                         Log.d("userpath",path1);
                         secilenResim1= Uri.parse(path1);
                         Picasso.with(rootView.getContext()).load(secilenResim1).fit().transform(transformation).into(kresim);
-
-
-
-                    }
 
 
                 }

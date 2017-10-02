@@ -200,6 +200,7 @@ public class ArkadasAra extends AppCompatActivity {
                 String path=kullaniciList.get(i).getPath();
                 uid=kullaniciList.get(i).getUid();
                 kuid=uid.split("/");
+
                 if(userID.equals(kuid[4])){
                     Intent intent =new Intent(ArkadasAra.this,Profil.class);
                     startActivity(intent);

@@ -31,7 +31,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-//Arkadaş  İstekleri listemizi doldurmamızı sağlayan class
 public class VarmisinYIstekleriAdapter extends BaseAdapter {
 
     LayoutInflater layoutInflater;

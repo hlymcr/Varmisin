@@ -1,16 +1,22 @@
 package com.gyk.s2h.varmisin;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +41,10 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Map;
@@ -53,6 +63,8 @@ public class UserProfilEdit extends AppCompatActivity {
     Uri selectedImageUri;
     Uri secilenResim;
     ImageView resim;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private String userChoosenTask;
     private static final String TAG = "UserProfilEdit";
 
 
@@ -123,7 +135,6 @@ public class UserProfilEdit extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 KisiModel user = dataSnapshot.getValue(KisiModel.class);
                 if(user==null){
-
                     Toast.makeText(UserProfilEdit.this, "Lütfen Profil bilgilerini ekleyiniz", Toast.LENGTH_SHORT).show();
 
                 }
@@ -161,28 +172,35 @@ public class UserProfilEdit extends AppCompatActivity {
         i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_SINGLE_PICTURE);
 
+
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.GRAY)
-                .borderWidthDp(3)
-                .cornerRadiusDp(30)
-                .oval(true)
-                .build();
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_SINGLE_PICTURE) {
-                selectedImageUri = data.getData();
-                Picasso.with(UserProfilEdit.this).load(selectedImageUri).fit().transform(transformation).into(selectedImagePreview);
+         final Transformation transformation = new RoundedTransformationBuilder()
+                 .borderColor(Color.GRAY)
+                 .borderWidthDp(3)
+                 .cornerRadiusDp(30)
+                 .oval(true)
+                 .build();
+         if (resultCode == RESULT_OK) {
+             if (requestCode == SELECT_SINGLE_PICTURE) {
+                 selectedImageUri = data.getData();
+                 Picasso.with(UserProfilEdit.this).load(selectedImageUri).fit().transform(transformation).into(selectedImagePreview);
 
-            }
+             }
+             else{
 
-        } else {
-            // report failure
-            Toast.makeText(getApplicationContext(), R.string.msg_failed_to_get_intent_data, Toast.LENGTH_LONG).show();
-            Log.d(MainActivity.class.getSimpleName(), "Failed to get intent data, result code is " + resultCode);
-        }
-    }
+
+
+             }
+
+         } else {
+             // report failure
+             Toast.makeText(getApplicationContext(), R.string.msg_failed_to_get_intent_data, Toast.LENGTH_LONG).show();
+             Log.d(MainActivity.class.getSimpleName(), "Failed to get intent data, result code is " + resultCode);
+         }
+     }
     public void Tarih(View view){
         //Datepicker
         Calendar mcurrentTime = Calendar.getInstance();

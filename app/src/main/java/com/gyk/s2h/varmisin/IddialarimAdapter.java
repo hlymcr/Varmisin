@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//Arkadaş  İstekleri listemizi doldurmamızı sağlayan class
+//Iddialarım listemizi doldurmamızı sağlayan class
 public class IddialarimAdapter extends BaseAdapter {
 
     LayoutInflater layoutInflater;
@@ -110,12 +110,16 @@ public class IddialarimAdapter extends BaseAdapter {
             });
 
         }
-        bekleme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(satir.getContext(), "Onay bekleniyor...", Toast.LENGTH_SHORT).show();
-            }
-        });
+        else {
+            bekleme.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(satir.getContext(), "Onay bekleniyor...", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
         adSoyad.setText(kisiModel.getIsim());
         Iddia.setText(kisiModel.getSure() + " saat sürede " + kisiModel.getAdimS() + " adım");
 

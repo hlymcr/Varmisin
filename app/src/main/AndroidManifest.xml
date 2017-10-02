@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-feature android:name="android.hardware.sensor.stepcounter" />
     <uses-feature android:name="android.hardware.sensor.stepdetector" />
@@ -22,6 +20,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
+
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -53,11 +52,17 @@
         <activity android:name=".IddiaTanimlari" />
         <activity android:name=".YuruyusDetay" />
         <activity android:name=".VarmisinYIstekleri" />
-        <activity android:name=".YuruyusDetayKabul"></activity>
+        <activity android:name=".YuruyusDetayKabul" />
 
         <service
             android:name=".FStepService"
-            android:label="FStep service"/>
+            android:label="FStep service" />
+
+        <activity android:name=".YemekDetay" />
+        <activity android:name=".MuzikDetay" />
+        <activity android:name=".GuzelDetay" />
+        <activity android:name=".GuncelDetay" />
+        <activity android:name=".ResimDetay"></activity>
     </application>
 
 </manifest>
